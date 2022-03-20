@@ -36,8 +36,6 @@ public class menu extends AppCompatActivity {
     String apotelesma, type;
     RecyclerView recyclerView;
     MyListAdapter adapter;
-    //ArrayList myListData = new ArrayList<>(Arrays.asList(".", ".", ".", ".", ".", ".", ".",".", ".", ".", ".", "55", ".", "77"));
-   // ArrayList myListData = new ArrayList<>(Arrays.asList(".", "", "", "", "", "", "","", "", "", "", "", "", ""));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
