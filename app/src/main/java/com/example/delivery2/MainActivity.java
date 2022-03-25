@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (Apotelesma.charAt(i) == '*') {
                 text1 = text1 + " \n";
             } else if (Apotelesma.charAt(i) == '@') {
-                g.setArraylist(text1);
+                g.setArraylist(text1, R.drawable.alert);
               // ALapotelesmaData.add(text1);
                 text1 = "";
             }

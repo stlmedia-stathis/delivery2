@@ -1,6 +1,10 @@
 package com.example.delivery2;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -34,7 +42,14 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.textView.setText(listdata.get(position).toString());
+        String perigrafi;
+        Integer pos;
+        perigrafi = (listdata.get(position).toString());
+        pos = perigrafi.indexOf("+@");
+        holder.textView.setText(perigrafi.substring(0, pos));
+        holder.imageView.setImageResource(getInt(perigrafi.substring(pos, perigrafi.length())));
+       // holder.textView.setText(listdata.get(position).toString());
+    //   holder.imageView.setImageResource(listdata.get(position).get(0));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +70,14 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-         //   this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
+          //  this.imageView.setImageResource(R.drawable.alagi);
             this.textView = (TextView) itemView.findViewById(R.id.textView);
             relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout);
         }
     }
+    public int getInt(String s) {
+        return Integer.parseInt(s.replaceAll("[\\D]", ""));
+    }
+
 }

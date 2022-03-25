@@ -43,6 +43,8 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.menu);
         // get the reference of RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+
      //  myListData.add("1");
      //  myListData.add("2");
       //myListData.add(g.getArraylist());
@@ -50,6 +52,7 @@ public class menu extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
+      //  MyListAdapter customAdapter = new MyListAdapter(menu.this, g.getArraylist());
         MyListAdapter customAdapter = new MyListAdapter(menu.this, g.getArraylist());
        // customAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
