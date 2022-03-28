@@ -136,8 +136,4 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.InsertEntoliSQL SQL = new MainActivity.InsertEntoliSQL(this);
         SQL.execute("insertentoli","PASS1234","https://www.stlmedia.gr/aps/deliveri_selectkatigoria.php");
     }
-
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
 }
