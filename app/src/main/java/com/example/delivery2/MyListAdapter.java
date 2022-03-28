@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -26,6 +28,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     private
     ArrayList listdata;
     Context context;
+    ItemClickListener clickListener;
     // RecyclerView recyclerView;
     public MyListAdapter(Context context, ArrayList listdata) {
         this.context = context;
@@ -42,18 +45,24 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
         String perigrafi;
         Integer pos;
         perigrafi = (listdata.get(position).toString());
-        pos = perigrafi.indexOf("+@");
+        pos = perigrafi.indexOf("+#");
+        String Url = "https://www.stlmedia.gr/aps/images";
+        String imageUri = perigrafi.substring(pos+2, perigrafi.length());
         holder.textView.setText(perigrafi.substring(0, pos));
-        holder.imageView.setImageResource(getInt(perigrafi.substring(pos, perigrafi.length())));
+      //  Toast.makeText(context,Url+"/"+imageUri,Toast.LENGTH_LONG).show();
+        Picasso.with(context).load(Url+"/"+imageUri).resize(150, 150).into(holder.imageView);
+      //  holder.imageView.setImageResource(Picasso.get().load(imageUri).into(ivBasicImage););
        // holder.textView.setText(listdata.get(position).toString());
     //   holder.imageView.setImageResource(listdata.get(position).get(0));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Toast.makeText(context,"click on item: "+holder.textView.getText().toString(),Toast.LENGTH_LONG).show();
+             // Toast.makeText(context,"click on item: "+holder.textView.getText().toString(),Toast.LENGTH_LONG).show();
+                clickListener.onClick(view, holder.textView.getText().toString());
             }
         });
     }
@@ -79,5 +88,14 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     public int getInt(String s) {
         return Integer.parseInt(s.replaceAll("[\\D]", ""));
     }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public void onClick(View view) {
+     //   if (clickListener != null) clickListener.onClick(view, holder.textView.getText().toString());
+    }
+
 
 }

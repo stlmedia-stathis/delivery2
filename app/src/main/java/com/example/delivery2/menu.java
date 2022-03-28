@@ -30,12 +30,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class menu extends AppCompatActivity {
+public class menu extends AppCompatActivity implements ItemClickListener {
     private
     ArrayList<String> myListData = new ArrayList<String>();
     String apotelesma, type;
     RecyclerView recyclerView;
     MyListAdapter adapter;
+    Globals g = (Globals) getApplication();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,6 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.menu);
         // get the reference of RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-
-     //  myListData.add("1");
-     //  myListData.add("2");
-      //myListData.add(g.getArraylist());
         // set a LinearLayoutManager with default vertical orientation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -56,6 +52,7 @@ public class menu extends AppCompatActivity {
         MyListAdapter customAdapter = new MyListAdapter(menu.this, g.getArraylist());
        // customAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
+        customAdapter.setClickListener(this);
     }
 
     private class InsertEntoliSQL extends AsyncTask<String,Void,String> {
@@ -151,5 +148,9 @@ public class menu extends AppCompatActivity {
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClick(View view, String position) {
+toastMessage(position);
     }
 }

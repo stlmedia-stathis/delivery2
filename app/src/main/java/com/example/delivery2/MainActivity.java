@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readapotelesma(String Apotelesma) {
+        ALapotelesmaData.clear();
         Globals g = (Globals) getApplication();
         String text1;
         text1 = "";
@@ -122,16 +124,20 @@ public class MainActivity extends AppCompatActivity {
             } else if (Apotelesma.charAt(i) == '*') {
                 text1 = text1 + " \n";
             } else if (Apotelesma.charAt(i) == '@') {
-                g.setArraylist(text1, R.drawable.alert);
-              // ALapotelesmaData.add(text1);
+              ALapotelesmaData.add(text1);
                 text1 = "";
             }
         }
+        g.setArraylist(ALapotelesmaData);
         progress.dismiss();
     }
 
     private void showpelatis(){
         MainActivity.InsertEntoliSQL SQL = new MainActivity.InsertEntoliSQL(this);
-        SQL.execute("insertentoli","PASS1234","https://www.melikriton.gr/eshopmanager/w_order_selectpelati.php");
+        SQL.execute("insertentoli","PASS1234","https://www.stlmedia.gr/aps/deliveri_selectkatigoria.php");
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }
